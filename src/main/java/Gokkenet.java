@@ -8,10 +8,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Gokkenet extends PApplet {
-    MessageSide ms;
+
     LoginSide ls;
-    ChooseThread ct;
-    Message message;
+    String testUser = "Albert" , testPassword = "Abe123";
     long userId;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
@@ -38,8 +37,7 @@ public class Gokkenet extends PApplet {
     @Override
     public void setup() {
         ls = new LoginSide(this);
-        ms = new MessageSide(this, connection);
-        ct = new ChooseThread(this, connection);
+
 
 
     }
@@ -49,24 +47,12 @@ public class Gokkenet extends PApplet {
 
         clear();
         background(200);
-        ms.visible = ct.chatVisible;
+
         ls.drawSide();
 
         if (ls.visible && ls.btnLogin.klikket == true)
             login();
-        if (ct.visibale)
-            ct.drawCT();
-        if (ms.visible) {
-            ms.drawMessage();
-            ms.updateMessages();
-            if (frameCount % 100 == 0) {
-                long threadId = ct.thredeGroupsList.get(ct.getThreadid()).getThreadId();
 
-                ms.setThreadId(threadId);
-                ms.setUserId(userId);
-
-            }
-        }
 
     }
 
@@ -76,9 +62,7 @@ public class Gokkenet extends PApplet {
             ls.typede(key);
         }
 
-        if(ls.visible == false && ct.visibale == false){
-            ms.writeM(key);
-        }
+
 
     }
 
@@ -86,11 +70,6 @@ public class Gokkenet extends PApplet {
     public void mouseClicked() {
         if (ls.visible) {
             ls.clik(mouseX, mouseY);
-        } else if(ct.visibale) {
-            ct.click(mouseX, mouseY);
-        }
-        if(ms.visible) {
-            ms.click(mouseX, mouseY);
         }
     }
     public String getHash(String passwordToHash){
@@ -136,9 +115,10 @@ public class Gokkenet extends PApplet {
                 System.out.println(rsPassword);
                 System.out.println("");
 
-                if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)) {
+                if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
+                        || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword) ) {
                     ls.visible = false;
-                    ct.visibale = true;
+
                     ls.password.klikket = false;
                     userId = rsUser.getLong(3);
                 }
