@@ -8,7 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Gokkenet extends PApplet {
-
+    
     LoginSide ls;
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
@@ -39,13 +39,13 @@ public class Gokkenet extends PApplet {
         ls = new LoginSide(this);
 
 
-
     }
 
     @Override
     public void draw() {
 
         clear();
+
         background(200);
 
         ls.drawSide();
