@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.data.Table;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +13,8 @@ public class Gokkenet extends PApplet {
     LoginSide ls;
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
+    BattelSequens bs;
+    Table questions;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
     private Connection connection = null;
@@ -36,7 +39,9 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void setup() {
+        questions = loadTable("sp.csv");
         ls = new LoginSide(this);
+        bs = new BattelSequens(this, questions);
 
 
     }
@@ -47,11 +52,16 @@ public class Gokkenet extends PApplet {
         clear();
 
         background(200);
-
+        if(ls.visible){
         ls.drawSide();
 
-        if (ls.visible && ls.btnLogin.klikket == true)
+        }else{
+            bs.drawBattel();
+        }
+
+        if (ls.visible && ls.btnLogin.klikket == true) {
             login();
+        }
 
 
     }
@@ -71,6 +81,8 @@ public class Gokkenet extends PApplet {
         if (ls.visible) {
             ls.clik(mouseX, mouseY);
         }
+        bs.clicked(mouseX,mouseY);
+
     }
     public String getHash(String passwordToHash){
 
@@ -118,7 +130,7 @@ public class Gokkenet extends PApplet {
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
                         || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword) ) {
                     ls.visible = false;
-
+                    bs.visibal = true;
                     ls.password.klikket = false;
                     userId = rsUser.getLong(3);
                 }
