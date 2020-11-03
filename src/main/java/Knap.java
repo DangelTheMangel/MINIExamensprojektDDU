@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public abstract class Knap {
     //variabler
@@ -46,6 +47,14 @@ public abstract class Knap {
         }
 
         p.rect(positionX, positionY, sizeX, sizeY);
+        setTekst(text);
+    }
+
+    void tegnKort(PImage img) {
+        p.stroke(1, 46, 74);
+        p.noFill();
+        p.fill(200);
+        p.image(img, positionX, positionY);
         setTekst(text);
     }
 
