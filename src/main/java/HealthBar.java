@@ -4,10 +4,11 @@ public class HealthBar {
     float posx,posy;
     float health =100;
     PApplet p;
-    HealthBar(PApplet p,float posx,float posy){
+    HealthBar(PApplet p,float posx,float posy, float health){
     this.p = p;
     this.posx = posx;
     this.posy = posy;
+    this.health = health;
     }
     void tegnHealthBar(){
         p.text("Health",posx,posy);

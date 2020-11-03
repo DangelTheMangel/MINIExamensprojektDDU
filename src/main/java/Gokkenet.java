@@ -82,7 +82,10 @@ public class Gokkenet extends PApplet {
             ls.clik(mouseX, mouseY);
         }
         bs.clicked(mouseX,mouseY);
+        if(bm.visbel){
+            bm.clicked(mouseX,mouseY);
 
+        }
     }
     public String getHash(String passwordToHash){
 
@@ -130,7 +133,8 @@ public class Gokkenet extends PApplet {
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
                         || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword) ) {
                     ls.visible = false;
-                    bs.visibal = true;
+                    bm.visbel = true;
+
                     ls.password.klikket = false;
                     userId = rsUser.getLong(3);
                 }
