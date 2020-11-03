@@ -5,7 +5,7 @@ import processing.data.Table;
 
 import java.util.Random;
 
-public class BattelSequens {
+public class Qaustions {
     PApplet p;
     Table questions;
     String questionsText;
@@ -16,7 +16,7 @@ public class BattelSequens {
     String[] answers = {"","","",""};
     PVector rbg = new PVector(0,0,0);
 
-    public BattelSequens(PApplet p, Table questions) {
+    public Qaustions(PApplet p, Table questions) {
         this.p = p;
         this.questions = questions;
        // ran = (int)p.random(1,questions.getRowCount());

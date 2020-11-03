@@ -13,7 +13,7 @@ public class Gokkenet extends PApplet {
     LoginSide ls;
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
-    BattelSequens bs;
+    Qaustions bs;
     Table questions;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
@@ -41,7 +41,7 @@ public class Gokkenet extends PApplet {
     public void setup() {
         questions = loadTable("sp.csv");
         ls = new LoginSide(this);
-        bs = new BattelSequens(this, questions);
+        bs = new Qaustions(this, questions);
 
 
     }
