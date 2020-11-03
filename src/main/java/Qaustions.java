@@ -11,8 +11,8 @@ public class Qaustions {
     Table questions;
     String questionsText;
     AlmindeligKnap btnAnswerOne, btnAnswerTwo, btnAnswerThree, btnAnswerFour, btnNext ;
-    boolean answerd = false;
-    int ran;
+    boolean answerd = false , rightAnser;
+    int points;
     boolean visibal = false;
     String[] answers = {"","","",""};
     PVector rbg = new PVector(0,0,0);
@@ -27,12 +27,13 @@ public class Qaustions {
         btnAnswerThree = new AlmindeligKnap(p,100,300,300,50, "3");
         btnAnswerFour = new AlmindeligKnap(p,100,400,300,50, "4");
         btnNext = new AlmindeligKnap(p,100,450,300,50, "next");
-
+        rightAnser = false;
         newQustion();
 
     }
 
     public void battleVisual(){
+        p.background(200,200,200,100);
         card = p.loadImage("baggrund.png");
         erClikked(btnAnswerFour);
         erClikked(btnAnswerThree);
@@ -48,8 +49,13 @@ public class Qaustions {
         if(answerd){
             btnNext.tegnKnap();
             if(btnNext.klikket){
-                answerd = false;
-                newQustion();
+                if(rightAnser){
+                    points = -10;
+                }else {
+                    points = 10;
+                }
+                System.out.println(points);
+                visibal= false;
                 btnNext.registrerRelease();
             }
         }
@@ -70,26 +76,27 @@ public class Qaustions {
     }
 
     void  erClikked(AlmindeligKnap btn){
-        if(btn.klikket && btn.text.equals(questionsText = questions.getString(ran,1)) && !answerd){
+        if(btn.klikket && btn.text.equals(questionsText = questions.getString(0,1)) && !answerd){
             rbg = new PVector(0,200,0);
             btn.registrerRelease();
             answerd = true;
-        } else if(btn.klikket && !btn.text.equals(questionsText = questions.getString(ran,1))&& !answerd){
+            rightAnser = false;
+        } else if(btn.klikket && !btn.text.equals(questionsText = questions.getString(0,1))&& !answerd){
             rbg = new PVector(200,0,0);
             btn.registrerRelease();
             answerd = true;
+            rightAnser = true;
         }
     }
 
     void newQustion(){
         rbg = new PVector(0,0,0);
-        ran = (int)(p.random(1,questions.getRowCount()));
-        questionsText = questions.getString(ran,0);
+        questionsText = questions.getString(0,0);
         for(int i = 0; i < answers.length ; ++i){
-            int ranAns = (int)(p.random(1,5));
+            int ranAns = (int)(p.random(0,5));
             System.out.println(ranAns);
-            if (!questions.getString(ran,ranAns).equals(answers[i])){
-                answers[i] = questions.getString(ran,ranAns);
+            if (!questions.getString(0,ranAns).equals(answers[i])){
+                answers[i] = questions.getString(0,ranAns);
                 System.out.println(answers[i]);
             }
         }
@@ -97,5 +104,9 @@ public class Qaustions {
         btnAnswerTwo.text = answers[1];
         btnAnswerThree.text = answers[2];
         btnAnswerFour.text = answers[3];
+    }
+
+    int getPoints(){
+        return points;
     }
 }

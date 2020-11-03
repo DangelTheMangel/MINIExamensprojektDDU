@@ -13,7 +13,8 @@ public class Gokkenet extends PApplet {
     LoginSide ls;
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
-    Qaustions bs;
+    BattleMenu bm;
+
     Table questions;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
@@ -34,14 +35,14 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void settings() {
-        size(500,500);
+        size(1280,720);
     }
 
     @Override
     public void setup() {
         questions = loadTable("sp.csv");
         ls = new LoginSide(this);
-        bs = new Qaustions(this, questions);
+        bm = new BattleMenu(this, questions );
 
 
     }
@@ -55,13 +56,15 @@ public class Gokkenet extends PApplet {
         if(ls.visible){
         ls.drawSide();
 
-        }else{
-            bs.drawBattel();
+        } else if(bm.visbel){
+            bm.drawBattleMenu();
         }
 
         if (ls.visible && ls.btnLogin.klikket == true) {
             login();
         }
+
+
 
 
     }
@@ -81,7 +84,6 @@ public class Gokkenet extends PApplet {
         if (ls.visible) {
             ls.clik(mouseX, mouseY);
         }
-        bs.clicked(mouseX,mouseY);
         if(bm.visbel){
             bm.clicked(mouseX,mouseY);
 
