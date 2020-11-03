@@ -56,7 +56,7 @@ public class Gokkenet extends PApplet {
         ls.drawSide();
 
         }else{
-            bs.drawBattel();
+            bs.battleVisual();
         }
 
         if (ls.visible && ls.btnLogin.klikket == true) {

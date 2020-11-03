@@ -1,5 +1,6 @@
 import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.core.PVector;
 import processing.data.Table;
 
@@ -15,6 +16,7 @@ public class Qaustions {
     boolean visibal = false;
     String[] answers = {"","","",""};
     PVector rbg = new PVector(0,0,0);
+    PImage card;
 
     public Qaustions(PApplet p, Table questions) {
         this.p = p;
@@ -30,17 +32,18 @@ public class Qaustions {
 
     }
 
-    public void drawBattel(){
+    public void battleVisual(){
+        card = p.loadImage("baggrund.png");
         erClikked(btnAnswerFour);
         erClikked(btnAnswerThree);
         erClikked(btnAnswerTwo);
         erClikked(btnAnswerOne);
         p.fill(rbg.x,rbg.y,rbg.z);
         p.text(questionsText,100,50);
-        btnAnswerFour.tegnKnap();
-        btnAnswerThree.tegnKnap();
-        btnAnswerTwo.tegnKnap();
-        btnAnswerOne.tegnKnap();
+        btnAnswerFour.tegnKort(card);
+        btnAnswerThree.tegnKort(card);
+        btnAnswerTwo.tegnKort(card);
+        btnAnswerOne.tegnKort(card);
 
         if(answerd){
             btnNext.tegnKnap();
