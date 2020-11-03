@@ -34,7 +34,7 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void settings() {
-        size(500,500);
+        size(1280,720);
     }
 
     @Override
