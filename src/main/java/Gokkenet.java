@@ -15,7 +15,7 @@ public class Gokkenet extends PApplet {
     long userId;
     Qaustions bs;
     Table questions;
-    BattleMenu bm;
+
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
     private Connection connection = null;
 
@@ -34,7 +34,7 @@ public class Gokkenet extends PApplet {
 
     @Override
     public void settings() {
-        size(1280,720);
+        size(500,500);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Gokkenet extends PApplet {
         questions = loadTable("sp.csv");
         ls = new LoginSide(this);
         bs = new Qaustions(this, questions);
-        bm = new BattleMenu(this,questions);
+
 
     }
 
@@ -56,7 +56,7 @@ public class Gokkenet extends PApplet {
         ls.drawSide();
 
         }else{
-            bm.drawBattleMenu();
+            bs.drawBattel();
         }
 
         if (ls.visible && ls.btnLogin.klikket == true) {

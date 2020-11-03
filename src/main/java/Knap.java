@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.core.PVector;
 
 public abstract class Knap {
     //variabler
@@ -8,10 +9,11 @@ public abstract class Knap {
     String text;
     boolean klikket = false;
 
-
+    PVector color;
     PApplet p;
 
     Knap(PApplet papp, int posX, int posY, int sizeX, int sizeY, String text ) {
+
         p = papp;
         positionX = posX;
         positionY = posY;
@@ -31,7 +33,7 @@ public abstract class Knap {
     }
 
     void setTekst(String tekst) {
-        p.fill(0);
+        p.fill(255);
 
         p.text(tekst, positionX +(sizeX/16), positionY + (sizeY/2));
 
@@ -53,7 +55,6 @@ public abstract class Knap {
     void tegnKort(PImage img) {
         p.stroke(1, 46, 74);
         p.noFill();
-        p.fill(200);
         p.image(img, positionX, positionY);
         setTekst(text);
     }
