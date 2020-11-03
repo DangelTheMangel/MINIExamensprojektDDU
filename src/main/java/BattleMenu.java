@@ -22,6 +22,7 @@ public class BattleMenu {
           QaustionOne.tegnKnap();
           QaustionTwo.tegnKnap();
           QaustionThree.tegnKnap();
+          //he
 
         }
 
