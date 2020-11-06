@@ -88,6 +88,7 @@ public class Qaustions {
             btn.registrerRelease();
             answerd = true;
             rightAnser = true;
+
         }
     }
 

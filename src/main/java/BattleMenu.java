@@ -20,8 +20,6 @@ public class BattleMenu {
         QaustionOne= new AlmindeligKnap(p,350,500,200,220, "1");
         QaustionTwo = new AlmindeligKnap(p,550,500,200,220, "2");
         QaustionThree = new AlmindeligKnap(p,750,500,200,220, "3");
-        EHealthBar = new HealthBar(p,50,100,eLife);
-        PHealthBar = new HealthBar(p,1000,600,pLife);
         qs = new Qaustions(p,qaustions);
         makeQaustions();
         changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
@@ -32,6 +30,8 @@ public class BattleMenu {
     }
 
         void drawBattleMenu(){
+            EHealthBar = new HealthBar(p,50,100,eLife);
+            PHealthBar = new HealthBar(p,1000,600,pLife);
           QaustionOne.tegnKnap();
           QaustionTwo.tegnKnap();
           QaustionThree.tegnKnap();
@@ -52,8 +52,11 @@ public class BattleMenu {
               qs.battleVisual();
 
           }
+            if(qs.rightAnser ==true&& qs.answerd ==true){
+                eLife=1;
+            }
 
-
+            p.println(qs.rightAnser);
 
 
 
@@ -94,6 +97,7 @@ public class BattleMenu {
                 qs = new Qaustions(p,spagersmal.get(i).qaustion);
                 qs.visibal = true;
                 k.registrerRelease();
+
             }
         }
     }
