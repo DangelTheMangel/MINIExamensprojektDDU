@@ -53,7 +53,7 @@ public class BattleMenu {
 
           }
             if(qs.rightAnser ==true&& qs.answerd ==true){
-                eLife=1;
+                eLife-=1;
             }
 
             p.println(qs.rightAnser);
