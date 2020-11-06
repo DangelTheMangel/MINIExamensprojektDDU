@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.data.Table;
 
 import java.security.MessageDigest;
@@ -14,7 +15,7 @@ public class Gokkenet extends PApplet {
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
     BattleMenu bm;
-
+    PImage bg;
     Table questions;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
@@ -43,7 +44,7 @@ public class Gokkenet extends PApplet {
         questions = loadTable("sp.csv");
         ls = new LoginSide(this);
         bm = new BattleMenu(this, questions );
-
+        bg = loadImage("bg.png");
 
     }
 
@@ -52,7 +53,7 @@ public class Gokkenet extends PApplet {
 
         clear();
 
-        background(200);
+        background(bg);
         if(ls.visible){
         ls.drawSide();
 
