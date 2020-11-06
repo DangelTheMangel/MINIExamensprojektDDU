@@ -2,6 +2,7 @@ import com.mysql.cj.x.protobuf.MysqlxDatatypes;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+import processing.data.StringList;
 import processing.data.Table;
 
 import java.util.Random;
@@ -21,6 +22,7 @@ public class Qaustions {
     public Qaustions(PApplet p, Table questions) {
         this.p = p;
         this.questions = questions;
+        points = 0;
        // ran = (int)p.random(1,questions.getRowCount());
         btnAnswerOne = new AlmindeligKnap(p,100,100,300,50, "1");
         btnAnswerTwo = new AlmindeligKnap(p,100,200,300,50, "2");
@@ -92,13 +94,17 @@ public class Qaustions {
     void newQustion(){
         rbg = new PVector(0,0,0);
         questionsText = questions.getString(0,0);
-        for(int i = 0; i < answers.length ; ++i){
-            int ranAns = (int)(p.random(0,5));
-            System.out.println(ranAns);
-            if (!questions.getString(0,ranAns).equals(answers[i])){
-                answers[i] = questions.getString(0,ranAns);
-                System.out.println(answers[i]);
-            }
+
+        StringList sp = new StringList();
+        for(int i = 1; i < answers.length + 1 ; ++i){
+            sp.append(questions.getString(0,i));
+
+        }
+
+        sp.shuffle();
+        for(int i = 0; i < answers.length  ; ++i){
+            answers[i] = sp.get(i);
+
         }
         btnAnswerOne.text = answers[0];
         btnAnswerTwo.text = answers[1];

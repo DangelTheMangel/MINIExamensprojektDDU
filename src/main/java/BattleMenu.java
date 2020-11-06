@@ -7,6 +7,7 @@ public class BattleMenu {
     boolean visbel = false;
     float eLife=100, pLife=100;
     int firstQ = 0,middleQ= 1,lastQ = 2 , chosen;
+    int oldsum;
     PApplet p;
     ArrayList<QaustionsData> spagersmal = new ArrayList<QaustionsData>();
     AlmindeligKnap QaustionOne, QaustionTwo, QaustionThree;
@@ -27,6 +28,7 @@ public class BattleMenu {
         changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
         changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
 
+
     }
 
         void drawBattleMenu(){
@@ -40,14 +42,20 @@ public class BattleMenu {
           registerClick(QaustionTwo,middleQ);
           registerClick(QaustionThree,lastQ);
 
-          if(qs.visibal){
-              spagersmal.get(chosen).points = qs.getPoints();
+          if(qs.visibal  ){
+              if(qs.answerd) {
+
+                  for(int i = 0; i < spagersmal.size(); ++i)
+                      System.out.println(spagersmal.get(i).qaustion.getString(0,0)+ " " + spagersmal.get(i).points + " \n");
+              }
 
               qs.battleVisual();
 
           }
-            int sum = spagersmal.get(0).points + spagersmal.get(1).points + spagersmal.get(2).points;
-            //System.out.println(sum);
+
+
+
+
 
 
         }
