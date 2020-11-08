@@ -53,7 +53,7 @@ public class BattleMenu {
 
           }
             if(qs.rightAnser ==true&& qs.answerd ==true && qs.visibal == false){
-                eLife-=10;
+                eLife-=50;
                 firstQ =ifSomthingDoTHis(firstQ);
                 middleQ =ifSomthingDoTHis(middleQ);
                 lastQ = ifSomthingDoTHis(lastQ);
@@ -68,7 +68,7 @@ public class BattleMenu {
             }
 
             if(qs.rightAnser ==false&& qs.answerd ==true && qs.visibal == false){
-                pLife-=10;
+                pLife-=50;
                 firstQ =ifSomthingDoTHis(firstQ);
                 middleQ =ifSomthingDoTHis(middleQ);
                 lastQ = ifSomthingDoTHis(lastQ);
@@ -83,7 +83,8 @@ public class BattleMenu {
             }
 
             p.println(qs.rightAnser);
-
+            ifLifeIsZero(EHealthBar);
+            ifLifeIsZero(PHealthBar);
 
 
 
@@ -137,5 +138,11 @@ public class BattleMenu {
 
 
             return i;
+        }
+
+        void ifLifeIsZero(HealthBar h){
+            if(h.health <= 0){
+                p.exit();
+            }
         }
     }
