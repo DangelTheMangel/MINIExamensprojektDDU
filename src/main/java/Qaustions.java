@@ -15,6 +15,7 @@ public class Qaustions {
     boolean answerd = false , rightAnser;
     int points;
     boolean visibal = false;
+
     String[] answers = {"","",""};
     PVector rbg = new PVector(0,0,0);
     PImage card;

@@ -52,8 +52,18 @@ public class BattleMenu {
               qs.battleVisual();
 
           }
-            if(qs.rightAnser ==true&& qs.answerd ==true){
-                eLife-=1;
+            if(qs.rightAnser ==true&& qs.answerd ==true && qs.visibal == false){
+                eLife-=10;
+                qs.answerd = false;
+
+
+            }
+
+            if(qs.rightAnser ==false&& qs.answerd ==true && qs.visibal == false){
+                pLife-=10;
+                qs.answerd = false;
+
+
             }
 
             p.println(qs.rightAnser);
