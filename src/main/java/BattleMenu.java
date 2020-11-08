@@ -54,6 +54,14 @@ public class BattleMenu {
           }
             if(qs.rightAnser ==true&& qs.answerd ==true && qs.visibal == false){
                 eLife-=10;
+                firstQ =ifSomthingDoTHis(firstQ);
+                middleQ =ifSomthingDoTHis(middleQ);
+                lastQ = ifSomthingDoTHis(lastQ);
+                changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
+                changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
+                changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
+
+                System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
 
 
@@ -61,6 +69,14 @@ public class BattleMenu {
 
             if(qs.rightAnser ==false&& qs.answerd ==true && qs.visibal == false){
                 pLife-=10;
+                firstQ =ifSomthingDoTHis(firstQ);
+                middleQ =ifSomthingDoTHis(middleQ);
+                lastQ = ifSomthingDoTHis(lastQ);
+                changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
+                changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
+                changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
+
+                System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
 
 
@@ -109,5 +125,17 @@ public class BattleMenu {
                 k.registrerRelease();
 
             }
+        }
+
+       int ifSomthingDoTHis(int i){
+           /* if(i+1 <qaustions.getRowCount()){
+                i =0;
+            }else{
+                i++;
+            }*/
+           i++;
+
+
+            return i;
         }
     }
