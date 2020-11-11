@@ -14,6 +14,7 @@ public class BattleMenu {
     Table qaustions;
     HealthBar EHealthBar, PHealthBar;
     Qaustions qs;
+    DataHolder dh;
     BattleMenu(PApplet p,Table qaustions){
     this.p = p;
     this.qaustions = qaustions;
@@ -30,6 +31,7 @@ public class BattleMenu {
     }
 
         void drawBattleMenu(){
+            System.out.println(dh.elevNavn);
             EHealthBar = new HealthBar(p,50,100,eLife);
             PHealthBar = new HealthBar(p,1000,600,pLife);
           QaustionOne.tegnKnap();
@@ -142,7 +144,7 @@ public class BattleMenu {
 
         void ifLifeIsZero(HealthBar h){
             if(h.health <= 0){
-                p.exit();
+                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2);
             }
         }
     }

@@ -10,13 +10,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Gokkenet extends PApplet {
-    
+
     LoginSide ls;
     String testUser = "Albert" , testPassword = "Abe123";
     long userId;
     BattleMenu bm;
     PImage bg;
     Table questions;
+    public DataHolder dh;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
     private Connection connection = null;
@@ -45,7 +46,6 @@ public class Gokkenet extends PApplet {
         ls = new LoginSide(this);
         bm = new BattleMenu(this, questions );
         bg = loadImage("bg.png");
-
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Gokkenet extends PApplet {
 
         background(bg);
         if(ls.visible){
-        ls.drawSide();
+            ls.drawSide();
 
         } else if(bm.visbel){
             bm.drawBattleMenu();
@@ -64,9 +64,6 @@ public class Gokkenet extends PApplet {
         if (ls.visible && ls.btnLogin.klikket == true) {
             login();
         }
-
-
-
 
     }
 
@@ -140,10 +137,12 @@ public class Gokkenet extends PApplet {
 
                     ls.password.klikket = false;
                     userId = rsUser.getLong(3);
+                    bm.dh = new DataHolder(0,0,userId, rsUsername);
+
                 }
             }
         } catch (SQLException throwable) {
-                throwable.printStackTrace();
+            throwable.printStackTrace();
         }
     }
 
