@@ -123,20 +123,27 @@ public class Gokkenet extends PApplet {
         Statement s = null;
         try {
             s = connection.createStatement();
-            ResultSet rsUser = s.executeQuery("SELECT [username],[password], [userID] FROM [user]");
+            ResultSet rsUser = s.executeQuery("SELECT [username],[password], [Teacher], [userID] FROM [user]");
 
             while (rsUser.next()) {
                 String rsUsername = rsUser.getString(1);
                 String rsPassword = rsUser.getString(2);
+                boolean rsRoleIsTeacher = rsUser.getBoolean(3);
+
 
                 System.out.println(rsUsername);
                 System.out.println(rsPassword);
-                System.out.println("");
+                System.out.println(rsRoleIsTeacher +"\n");
 
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
                         || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword) ) {
                     ls.visible = false;
-                    bm.visbel = true;
+                    if(!rsRoleIsTeacher){
+                        bm.visbel = true;
+                    }else {
+
+                    }
+
 
                     ls.password.klikket = false;
                     userId = rsUser.getLong(3);
