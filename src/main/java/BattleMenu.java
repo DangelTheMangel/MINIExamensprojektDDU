@@ -1,10 +1,12 @@
 import processing.core.PApplet;
 import processing.core.PConstants;
+import processing.core.PImage;
 import processing.data.Table;
 
 import java.util.ArrayList;
 
 public class BattleMenu {
+    PImage kort;
     boolean visbel = false;
     float eLife=100, pLife=100;
     int firstQ = 0,middleQ= 1,lastQ = 2 , chosen;
@@ -17,6 +19,7 @@ public class BattleMenu {
     Qaustions qs;
     DataHolder dh;
     BattleMenu(PApplet p,Table qaustions){
+        kort = p.loadImage("Kort.png");
     this.p = p;
     this.qaustions = qaustions;
         QaustionOne= new AlmindeligKnap(p,350,500,200,220, "1");
@@ -35,9 +38,9 @@ public class BattleMenu {
             System.out.println(dh.elevNavn);
             EHealthBar = new HealthBar(p,50,100,eLife);
             PHealthBar = new HealthBar(p,1000,600,pLife);
-          QaustionOne.tegnKnap();
-          QaustionTwo.tegnKnap();
-          QaustionThree.tegnKnap();
+          QaustionOne.tegnKort(kort);
+          QaustionTwo.tegnKort(kort);
+          QaustionThree.tegnKort(kort);
           EHealthBar.tegnHealthBar();
           PHealthBar.tegnHealthBar();
 

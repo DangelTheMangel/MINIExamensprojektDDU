@@ -6,11 +6,9 @@ public abstract class Knap {
     //variabler
     float positionX, positionY, sizeX, sizeY;
     float mouseX, mouseY;
-    int qp;
     String text;
     boolean klikket = false;
 
-    PVector color;
     PApplet p;
 
     Knap(PApplet papp, int posX, int posY, int sizeX, int sizeY, String text ) {
