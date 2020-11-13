@@ -5,6 +5,7 @@ import processing.core.PVector;
 import processing.data.StringList;
 import processing.data.Table;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Qaustions {
@@ -24,6 +25,7 @@ public class Qaustions {
         this.p = p;
         this.questions = questions;
         points = 0;
+
        // ran = (int)p.random(1,questions.getRowCount());
         btnAnswerOne = new AlmindeligKnap(p,100,100,300,50, "1");
         btnAnswerTwo = new AlmindeligKnap(p,100,200,300,50, "2");
@@ -53,9 +55,9 @@ public class Qaustions {
             btnNext.tegnKnap();
             if(btnNext.klikket){
                 if(rightAnser){
-                    points = -10;
+                   points =points-1;
                 }else {
-                    points = 10;
+                    points = points+1;
                 }
                 System.out.println(points);
                 visibal= false;
@@ -89,6 +91,7 @@ public class Qaustions {
             btn.registrerRelease();
             answerd = true;
             rightAnser = true;
+
         }
         if(klikket && !equalsAnwsered&& !answerd){
             rbg = new PVector(200,0,0);
