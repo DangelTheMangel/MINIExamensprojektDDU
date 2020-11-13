@@ -155,7 +155,7 @@ public class BattleMenu {
                 p.textSize(64);
                 p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2); //og det her er teksten
                 if(dh.svaretRigtigt==2){            //hvis man får alle rigtige siger den du er sej!
-                    p.text("Du fik alle rigtige!",p.width/2,p.height/2+60);
+                    p.text(dh.elevNavn+ " vandt!",p.width/2,p.height/2+60);
 
                 }
             }
