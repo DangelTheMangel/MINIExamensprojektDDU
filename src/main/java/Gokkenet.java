@@ -1,5 +1,6 @@
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.data.StringList;
 import processing.data.Table;
 
 import java.security.MessageDigest;
@@ -12,11 +13,13 @@ import java.sql.SQLException;
 public class Gokkenet extends PApplet {
 
     LoginSide ls;
-    String testUser = "Albert" , testPassword = "Abe123";
+    String testUser = " Albert" , testPassword = " Abe123";
+    StringList users = new StringList();
     long userId;
     BattleMenu bm;
     PImage bg;
     Table questions;
+    TeacherMenu tm;
     public DataHolder dh;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
@@ -46,6 +49,7 @@ public class Gokkenet extends PApplet {
         ls = new LoginSide(this);
         bm = new BattleMenu(this, questions );
         bg = loadImage("bg.png");
+        tm = new TeacherMenu(this);
     }
 
     @Override
@@ -57,13 +61,19 @@ public class Gokkenet extends PApplet {
         if(ls.visible){
             ls.drawSide();
 
-        } else if(bm.visbel){
+        }
+        if(bm.visbel){
             bm.drawBattleMenu();
+        }
+        if(tm.visibal){
+            tm.drawMenu();
         }
 
         if (ls.visible && ls.btnLogin.klikket == true) {
             login();
         }
+
+
 
     }
 
@@ -128,17 +138,31 @@ public class Gokkenet extends PApplet {
                 boolean rsRoleIsTeacher = rsUser.getBoolean(3);
 
 
+                        users.append(rsUsername);
+
+
+
+
+                for (int i =0; i<users.size(); ++i){
+                    System.out.println(users.get(i));
+
+
+                }
+
+
                 System.out.println(rsUsername);
                 System.out.println(rsPassword);
                 System.out.println(rsRoleIsTeacher +"\n");
 
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
-                        || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword) ) {
+                        || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword)) {
                     ls.visible = false;
                     if(!rsRoleIsTeacher){
                         bm.visbel = true;
                     }else {
-
+                        tm.userID = userId;
+                        tm.users=users;
+                        tm.visibal= true;
                     }
 
 
