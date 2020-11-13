@@ -1,4 +1,5 @@
 import processing.core.PApplet;
+import processing.core.PConstants;
 import processing.data.Table;
 
 import java.util.ArrayList;
@@ -66,7 +67,8 @@ public class BattleMenu {
                 System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
 
-
+                dh.svaretRigtigt++;
+                dh.spurgt++;
             }
 
             if(qs.rightAnser ==false&& qs.answerd ==true && qs.visibal == false){
@@ -81,7 +83,7 @@ public class BattleMenu {
                 System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
 
-
+                dh.spurgt++;
             }
 
             p.println(qs.rightAnser);
@@ -144,7 +146,14 @@ public class BattleMenu {
 
         void ifLifeIsZero(HealthBar h){
             if(h.health <= 0){
+                p.clear();
+                p.fill(255,255,255);
+                p.textMode(PConstants.CENTER);
                 p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2);
+                if(dh.svaretRigtigt==2){
+                    p.text("Du fik alle rigtige!",p.width/2,p.height/2+20);
+
+                }
             }
         }
     }
