@@ -146,12 +146,13 @@ public class BattleMenu {
 
         void ifLifeIsZero(HealthBar h){
             if(h.health <= 0){
-                p.clear();
-                p.fill(255,255,255);
-                p.textMode(PConstants.CENTER);
-                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2);
-                if(dh.svaretRigtigt==2){
-                    p.text("Du fik alle rigtige!",p.width/2,p.height/2+20);
+                p.clear();                          //vi laver et clear for at lave en sort skærm. Det kunne være fedt med en baggrund.
+                p.fill(255,255,255);                //den her og de 2 under laver teksten som den skal være.
+                p.textAlign(PConstants.CENTER);
+                p.textSize(64);
+                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2); //og det her er teksten
+                if(dh.svaretRigtigt==2){            //hvis man får alle rigtige siger den du er sej!
+                    p.text("Du fik alle rigtige!",p.width/2,p.height/2+60);
 
                 }
             }
