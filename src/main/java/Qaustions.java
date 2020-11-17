@@ -37,7 +37,7 @@ public class Qaustions {
 
     public void battleVisual(){
         p.background(200,200,200,100);
-        card = p.loadImage("baggrund.png");
+        card = p.loadImage("Hurtig.png");
 
         erClikked(btnAnswerThree);
         erClikked(btnAnswerTwo);
