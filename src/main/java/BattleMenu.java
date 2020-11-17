@@ -44,6 +44,7 @@ public class BattleMenu {
           EHealthBar.tegnHealthBar();
           PHealthBar.tegnHealthBar();
 
+          p.println(lastQ);
           registerClick(QaustionOne, firstQ);
           registerClick(QaustionTwo,middleQ);
           registerClick(QaustionThree,lastQ);
@@ -59,7 +60,7 @@ public class BattleMenu {
 
           }
             if(qs.rightAnser ==true&& qs.answerd ==true && qs.visibal == false){
-                eLife-=50;
+                eLife-=25;
                 firstQ =ifSomthingDoTHis(firstQ);
                 middleQ =ifSomthingDoTHis(middleQ);
                 lastQ = ifSomthingDoTHis(lastQ);
@@ -75,7 +76,7 @@ public class BattleMenu {
             }
 
             if(qs.rightAnser ==false&& qs.answerd ==true && qs.visibal == false){
-                pLife-=50;
+                pLife-=25;
                 firstQ =ifSomthingDoTHis(firstQ);
                 middleQ =ifSomthingDoTHis(middleQ);
                 lastQ = ifSomthingDoTHis(lastQ);
@@ -136,12 +137,13 @@ public class BattleMenu {
         }
 
        int ifSomthingDoTHis(int i){
-           /* if(i+1 <qaustions.getRowCount()){
+         /*   if(i<qaustions.getRowCount()){
                 i =0;
+
             }else{
                 i++;
             }*/
-           i++;
+                i++;
 
 
             return i;
