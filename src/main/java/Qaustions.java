@@ -19,7 +19,7 @@ public class Qaustions {
 
     String[] answers = {"","",""};
     PVector rbg = new PVector(0,0,0);
-    PImage card;
+    PImage card, player, Enemy, showHEadhog;
 
     public Qaustions(PApplet p, Table questions) {
         this.p = p;
