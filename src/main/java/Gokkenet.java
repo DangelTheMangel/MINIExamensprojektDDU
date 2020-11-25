@@ -137,18 +137,7 @@ public class Gokkenet extends PApplet {
                 String rsPassword = rsUser.getString(2);
                 boolean rsRoleIsTeacher = rsUser.getBoolean(3);
 
-
-                        users.append(rsUsername);
-
-
-
-
-                for (int i =0; i<users.size(); ++i){
-                    System.out.println(users.get(i));
-
-
-                }
-
+                users.append(rsUsername);
 
                 System.out.println(rsUsername);
                 System.out.println(rsPassword);
