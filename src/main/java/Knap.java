@@ -38,6 +38,13 @@ public abstract class Knap {
 
     }
 
+    void setTekstNummerTo(String tekst) {
+        p.fill(0);
+
+        p.text(tekst, positionX +(sizeX/16), positionY + (sizeY/4));
+
+    }
+
     void tegnKnap() {
         p.stroke(1, 46, 74);
         p.noFill();
@@ -51,11 +58,17 @@ public abstract class Knap {
         setTekst(text);
     }
 
-    void tegnKort(PImage img) {
+    void tegnKort(PImage img, boolean g) {
         p.stroke(1, 46, 74);
         p.noFill();
-        p.image(img, positionX, positionY);
-        setTekst(text);
+        p.image(img, positionX, positionY,sizeX,sizeY);
+        if(g){
+            setTekst(text);
+        }
+
+        if(!g){
+           setTekstNummerTo(text);
+        }
     }
 
     boolean erKlikket() {

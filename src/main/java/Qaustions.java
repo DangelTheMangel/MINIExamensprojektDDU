@@ -12,24 +12,26 @@ public class Qaustions {
     PApplet p;
     Table questions;
     String questionsText;
-    AlmindeligKnap btnAnswerOne, btnAnswerTwo, btnAnswerThree, btnAnswerFour, btnNext ;
+    AlmindeligKnap btnAnswerOne, btnAnswerTwo, btnAnswerThree, btnNext ;
     boolean answerd = false , rightAnser;
     int points;
     boolean visibal = false;
-
+    PImage enem;
     String[] answers = {"","",""};
     PVector rbg = new PVector(0,0,0);
     PImage card, player, Enemy, showHEadhog;
+    float fly = 0;
 
-    public Qaustions(PApplet p, Table questions) {
+    public Qaustions(PApplet p, Table questions, PImage enem) {
         this.p = p;
+        this.enem = enem;
         this.questions = questions;
         points = 0;
 
        // ran = (int)p.random(1,questions.getRowCount());
-        btnAnswerOne = new AlmindeligKnap(p,100,100,300,50, "1");
-        btnAnswerTwo = new AlmindeligKnap(p,100,200,300,50, "2");
-        btnAnswerThree = new AlmindeligKnap(p,100,300,300,50, "3");
+        btnAnswerOne = new AlmindeligKnap(p,100,100,400,70, "1");
+        btnAnswerTwo = new AlmindeligKnap(p,100,200,400,70, "2");
+        btnAnswerThree = new AlmindeligKnap(p,100,300,400,70, "3");
 
         btnNext = new AlmindeligKnap(p,100,450,300,50, "next");
         rightAnser = false;
@@ -38,6 +40,9 @@ public class Qaustions {
     }
 
     public void battleVisual(){
+        fly ++;
+        int sin = (int) (10*p.sin((float) (fly* 0.09)));
+
         p.background(200,200,200,100);
         card = p.loadImage("Hurtig.png");
 
@@ -47,9 +52,10 @@ public class Qaustions {
         p.fill(rbg.x,rbg.y,rbg.z);
         p.text(questionsText,100,50);
 
-        btnAnswerThree.tegnKort(card);
-        btnAnswerTwo.tegnKort(card);
-        btnAnswerOne.tegnKort(card);
+        btnAnswerThree.tegnKort(card,true);
+        btnAnswerTwo.tegnKort(card,true);
+        btnAnswerOne.tegnKort(card,true);
+        p.image(enem,p.width-500,90+sin, 400,400);
 
         if(answerd){
             btnNext.tegnKnap();

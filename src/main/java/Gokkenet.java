@@ -20,7 +20,6 @@ public class Gokkenet extends PApplet {
     PImage bg;
     Table questions;
     TeacherMenu tm;
-    public DataHolder dh;
 
     private String databaseURL = "jdbc:ucanaccess://src//main//java//resources//database.accdb";
     private Connection connection = null;
