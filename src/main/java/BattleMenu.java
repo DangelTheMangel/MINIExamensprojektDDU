@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class BattleMenu {
     PImage kort;
+    PImage player, Enemy, showHEadhog;
     boolean visbel = false;
     float eLife=100, pLife=100;
     int firstQ = 0,middleQ= 1,lastQ = 2 , chosen;
@@ -33,21 +34,31 @@ public class BattleMenu {
         changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
         changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
         changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
-
+        player = p.loadImage("fiske.png");
+        String[] en = {"div.png","e.png","x.png"};
+        Enemy = p.loadImage(en[(int)p.random(0,en.length)]);
+        showHEadhog = p.loadImage("fiskee.png");
 
     }
 
         void drawBattleMenu(){
-            System.out.println(dh.elevNavn);
+            //System.out.println(dh.elevNavn);
+
+
+
+            p.image(player,0,p.height-320);
+            p.image(showHEadhog,p.width-320,0+ 320);
+            p.image(Enemy,p.width-320,0+ 320);
             EHealthBar = new HealthBar(p,50,100,eLife);
             PHealthBar = new HealthBar(p,1000,600,pLife);
           QaustionOne.tegnKort(kort);
           QaustionTwo.tegnKort(kort);
           QaustionThree.tegnKort(kort);
+
           EHealthBar.tegnHealthBar();
           PHealthBar.tegnHealthBar();
 
-          p.println(lastQ);
+          //p.println(lastQ);
           registerClick(QaustionOne, firstQ);
           registerClick(QaustionTwo,middleQ);
           registerClick(QaustionThree,lastQ);
@@ -71,7 +82,7 @@ public class BattleMenu {
                 changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
                 changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
 
-                System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
+                //System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
 
                 dh.svaretRigtigt++;
@@ -87,15 +98,13 @@ public class BattleMenu {
                 changeBtnName(QaustionTwo, spagersmal.get(middleQ).qaustion.getString(0,0));
                 changeBtnName(QaustionThree, spagersmal.get(lastQ).qaustion.getString(0,0));
 
-                System.out.println("firstQ: " + firstQ + " middleQ: " + middleQ+ " lastQ: " + lastQ);
                 qs.answerd = false;
-
                 dh.spurgt++;
             }
 
             p.println(qs.rightAnser);
-            ifLifeIsZero(EHealthBar);
-            ifLifeIsZero(PHealthBar);
+            ifLifeIsZero(EHealthBar,true);
+            ifLifeIsZero(PHealthBar, false);
 
 
 
@@ -106,9 +115,9 @@ public class BattleMenu {
             QaustionTwo.registrerKlik(mouseX, mouseY);
             QaustionThree.registrerKlik(mouseX, mouseY);
             p.println(QaustionOne.erKlikket());
-            if(logOutKnap) {
+            /*if(logOutKnap) {
                 logOut.registrerKlik(mouseX, mouseY);
-            }
+            }*/
         } else if(qs.visibal ){
             qs.clicked(mouseX,mouseY);
         }
@@ -154,7 +163,7 @@ public class BattleMenu {
             return i;
         }
 
-        void ifLifeIsZero(HealthBar h){
+        void ifLifeIsZero(HealthBar h,boolean enemy){
             if(h.health <= 0){
                 logOutKnap = true;
                 p.clear();                          //vi laver et clear for at lave en sort skærm. Det kunne være fedt med en baggrund.
@@ -166,13 +175,15 @@ public class BattleMenu {
 
                 }
                 p.textSize(64);
-                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point.",p.width/2,p.height/2); //og det her er teksten
-                if(dh.svaretRigtigt==2){            //hvis man får alle rigtige siger den du er sej!
-                    p.text(dh.elevNavn+ " vandt!",p.width/2,p.height/2+60);
+                if(enemy == true)
+                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " + dh.elevNavn +" vandt",p.width/2,p.height/2); //og det her er teksten
+                if (enemy == false)
+                    p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " +
+                            "udforderen" +" vandt",p.width/2,p.height/2); //og det her er teksten
 
                 }
 
-                logOut.tegnKnap();
+               /* logOut.tegnKnap();*/
             }
         }
-    }
+
