@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Gokkenet extends PApplet {
 
     LoginSide ls;
-    String testUser = "Albert" , testPassword = "Abe123";
+    String testUser = " Albert" , testPassword = " Abe123";
     StringList users = new StringList();
     long userId;
     BattleMenu bm;
