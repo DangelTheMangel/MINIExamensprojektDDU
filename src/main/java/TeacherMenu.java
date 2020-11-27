@@ -11,20 +11,23 @@ public class TeacherMenu {
     TextFlet addSpergsmall;
     TextFlet addRigtigtSvar;
     TextFlet addSvar2;
-    TextFlet addSvar3 , hold;
+    TextFlet addSvar3 , hold, holdNavn;
     Table sp;
+    KlasseLoadeder klasseLoadeder = new KlasseLoadeder(p);
     boolean visibal = false; //christian visibel
     AlmindeligKnap editorKnap , backToMenu, nyElev;
-    AlmindeligKnap resultKnap;
-    AlmindeligKnap addSpergsmalK, elevEn,elevTo,elevTre;
+    AlmindeligKnap resultKnap, nyHoldMenu, indsaetNytHold;
+    AlmindeligKnap addSpergsmalK, elevEn,elevTo,elevTre, exit;
 
 
     //forskellige menuer
     boolean menuVisible = true;
     boolean resultVisible = false;
     boolean editorVisible = false;
+    boolean nyHoldVisible = false;
     TeacherMenu(PApplet p) {
         this.p = p;
+        exit = new AlmindeligKnap(p, 50, 460, p.width-100, 100, "Luk Program");
         elevEn = new AlmindeligKnap(p,50,220,p.width/2-100,50,"1");
         elevTo = new AlmindeligKnap(p,50,320,p.width/2-100,50,"2");
         elevTre = new AlmindeligKnap(p,50,420,p.width/2-100,50,"3");
@@ -38,11 +41,25 @@ public class TeacherMenu {
         backToMenu = new AlmindeligKnap(p,p.width/2 - 100,600,200,50,"back to menu");
         editorKnap = new AlmindeligKnap(p, 50, 100, p.width-100, 100, "Editor");
         resultKnap = new AlmindeligKnap(p, 50, 220, p.width-100, 100, "Resultater");
+        nyHoldMenu = new AlmindeligKnap(p,50, 340, p.width-100, 100, "Hold instillinger");
         addSpergsmalK = new AlmindeligKnap(p,50,650,100,50,"Tilføj spørgsmål");
+        indsaetNytHold = new AlmindeligKnap(p,50,220,p.width/2-100,50,"Tilføj nyt hold");
+        holdNavn = new TextFlet(p,50,100,p.width/2-100,50,"Nyt holdnavn");
 
         sp = p.loadTable("sp.csv");
     }
+
+
     void drawMenu() {
+        if(exit.klikket){
+            p.exit();
+        }
+
+        if(nyHoldVisible){
+            holdNavn.tegnTextFlet();
+            indsaetNytHold.tegnKnap();
+            backToMenu.tegnKnap();
+        }
         if(resultVisible){
             backToMenu.tegnKnap();
             drawReMenu();
@@ -51,12 +68,14 @@ public class TeacherMenu {
             menuVisible = true;
             resultVisible = false;
             editorVisible = false;
+            nyHoldVisible = false;
             backToMenu.registrerRelease();
         }
         if(editorKnap.klikket){
             menuVisible = false;
             resultVisible = false;
             editorVisible = true;
+            nyHoldVisible = false;
             editorKnap.registrerRelease();
         }
 
@@ -64,7 +83,18 @@ public class TeacherMenu {
             menuVisible = false;
             resultVisible = true;
             editorVisible = false;
+            nyHoldVisible = false;
             resultKnap.registrerRelease();
+        }
+
+        if(nyHoldMenu.klikket){
+            menuVisible = false;
+            resultVisible = false;
+            editorVisible = false;
+            nyHoldVisible = true;
+            //p.selectInput("Select a file to process:", "fileSelected");
+
+            nyHoldMenu.registrerRelease();
         }
 
 
@@ -95,9 +125,10 @@ public class TeacherMenu {
 
         if(menuVisible) {
             editorKnap.tegnKnap();
-            editorKnap.registrerKlik(200, 100);
             resultKnap.tegnKnap();
-            resultKnap.registrerKlik(200, 100);
+            nyHoldMenu.tegnKnap();
+            exit.tegnKnap();
+
         }
 
         if(editorVisible){
@@ -115,6 +146,12 @@ public class TeacherMenu {
         if (editorKnap.klikket){
             visibal = false;
             editorVisible = true;
+        }
+
+        if(indsaetNytHold.klikket){
+            System.out.println("hold tilføjet");
+            holdNavn.indput = "";
+            indsaetNytHold.registrerRelease();
         }
 
 
@@ -147,13 +184,29 @@ public class TeacherMenu {
             addSvar3.keyindput(key);
         }
 
+        if(resultVisible){
+            hold.keyindput(key);
+        }
+
+        if(nyHoldVisible){
+            holdNavn.keyindput(key);
+        }
+
 
     }
     void clik(float mx, float my) {
+
+        if(nyHoldVisible){
+            backToMenu.registrerKlik(mx,my);
+            indsaetNytHold.registrerKlik(mx,my);
+            holdNavn.KlikTjek(mx,my);
+        }
         if(menuVisible){
+            exit.registrerKlik(mx,my);
             editorKnap.registrerKlik(p.mouseX,p.mouseY);
             System.out.println("mx: " + p.mouseX + " my: " + p.mouseY);
             resultKnap.registrerKlik(mx,my);
+            nyHoldMenu.registrerKlik(mx,my);
         }
 
         if(editorVisible){
@@ -173,6 +226,11 @@ public class TeacherMenu {
 
         if(resultVisible){
             backToMenu.registrerKlik(mx,my);
+            hold.KlikTjek(mx,my);
+            elevEn.registrerKlik(mx,my);
+            elevTo.registrerKlik(mx,my);
+            elevTre.registrerKlik(mx,my);
+            nyElev.registrerKlik(mx,my);
         }
 
 

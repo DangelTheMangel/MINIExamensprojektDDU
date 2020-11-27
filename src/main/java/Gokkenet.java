@@ -1,8 +1,10 @@
+
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.data.StringList;
 import processing.data.Table;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
@@ -40,6 +42,19 @@ public class Gokkenet extends PApplet {
     @Override
     public void settings() {
         size(1280,720);
+    }
+
+    public void fileSelected(File selection) {
+        if (selection == null) {
+            println("Window was closed or the user hit cancel.");
+        } else {
+            try{
+                tm.klasseLoadeder.klasse = loadTable(selection.getPath());
+            } catch (NullPointerException g){
+                println("Fejl ved at loade filen der ligger ved" + selection.getPath());
+            }
+
+        }
     }
 
     @Override
