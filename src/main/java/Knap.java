@@ -22,15 +22,6 @@ public abstract class Knap {
 
     }
 
-    void klik() {
-        if (p.mousePressed &&
-                mouseX > positionX &&
-                mouseX < positionX + sizeX &&
-                mouseY > positionY &&
-                mouseY < positionY + sizeY) {
-        }
-    }
-
     void setTekst(String tekst) {
         p.fill(0);
 

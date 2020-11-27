@@ -29,7 +29,6 @@ public class LoginSide {
             password.keyindput(key);
             userName.keyindput(key);
         }
-        p.println();
     }
 
     void clik(float mx, float my) {

@@ -35,7 +35,6 @@ public class TeacherMenu {
         addRigtigtSvar.tegnTextFlet();
         addSvar2.tegnTextFlet();
         addSvar3.tegnTextFlet();
-        System.out.println(userID);
         p.text("Velkommen" + users.get((int) userID ), 100,100);
         if(menuVisible) {
             editorKnap.tegnKnap();

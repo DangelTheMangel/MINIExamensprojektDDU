@@ -70,7 +70,6 @@ public class BattleMenu {
         QaustionOne.positionY += sin/8;
         QaustionTwo.positionY += -sin/7;
         QaustionThree.positionY += sin/8;
-        //p.println(lastQ);
         registerClick(QaustionOne, firstQ);
         registerClick(QaustionTwo,middleQ);
         registerClick(QaustionThree,lastQ);
@@ -79,7 +78,7 @@ public class BattleMenu {
             if(qs.answerd) {
 
                 for(int i = 0; i < spagersmal.size(); ++i)
-                    System.out.println(spagersmal.get(i).qaustion.getString(0,0)+ " " + spagersmal.get(i).points + " \n");
+         System.out.println(spagersmal.get(i).qaustion.getString(0,0)+ " " + spagersmal.get(i).points + " \n");
             }
 
             qs.battleVisual();
@@ -114,7 +113,6 @@ public class BattleMenu {
             dh.spurgt++;
         }
 
-        p.println(qs.rightAnser);
         ifLifeIsZero(EHealthBar,true);
         ifLifeIsZero(PHealthBar, false);
 
@@ -126,7 +124,6 @@ public class BattleMenu {
             QaustionOne.registrerKlik(mouseX, mouseY);
             QaustionTwo.registrerKlik(mouseX, mouseY);
             QaustionThree.registrerKlik(mouseX, mouseY);
-            p.println(QaustionOne.erKlikket());
             if(logOutKnap) {
                 logOut.registrerKlik(mouseX, mouseY);
             }
@@ -143,7 +140,6 @@ public class BattleMenu {
             Table data = new Table();
             data.addRow(qaustions.getRow(i));
             spagersmal.add(new QaustionsData(data));
-            System.out.println(i);
         }
     }
 
@@ -187,7 +183,6 @@ public class BattleMenu {
 
             }
                 if(enemy == true){
-                    System.out.println(enemy);
                     logOut.tegnKnap();
                     p.textSize(64);
                     p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+
