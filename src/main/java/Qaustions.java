@@ -65,6 +65,7 @@ public class Qaustions {
                 }else {
                     points = points+1;
                 }
+                System.out.println(points);
                 visibal= false;
                 btnNext.registrerRelease();
             }
