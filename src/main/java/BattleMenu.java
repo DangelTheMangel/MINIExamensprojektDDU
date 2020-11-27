@@ -2,6 +2,8 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
 import processing.data.Table;
+import processing.data.TableRow;
+import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class BattleMenu {
     Qaustions qs;
     DataHolder dh;
     float fly = 0;
+    boolean saved = false;
     BattleMenu(PApplet p,Table qaustions){
         kort = p.loadImage("Kort.png");
         this.p = p;
@@ -171,7 +174,24 @@ public class BattleMenu {
         return i;
     }
 
+
+
     void ifLifeIsZero(HealthBar h,boolean enemy){
+        if(h.health <= 0 & !saved) {
+            Table table;
+            table = new Table();
+            table.addColumn("Navn");
+            table.addColumn("Svaret Rigtig");
+            TableRow newRow = table.addRow();
+            newRow.setString("Navn", dh.elevNavn);
+            newRow.setFloat("Svaret Rigtig",dh.svaretRigtigt);
+
+            p.saveTable(table,"data/"+dh.elevNavn+p.year() + p.month() + p.day() + p.hour() +p.minute() +p.second() +".csv");
+
+            saved=true;
+            System.out.println("gemte database håber jeg - Battle menu, 191");
+        }
+
         if(h.health <= 0){
             logOutKnap = true;
             p.clear();
@@ -195,9 +215,6 @@ public class BattleMenu {
                 p.textSize(64);
                 p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " +
                         "udforderen" +" vandt",p.width/2,p.height/2); //og det her er teksten
-
-                enemy = false;
-
             }
 
 

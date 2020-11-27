@@ -98,7 +98,6 @@ public class TeacherMenu {
         }
 
         if (resultKnap.klikket){
-            System.out.print("skrt");
             visibal = false;
             resultVisible = true;
         }
@@ -109,8 +108,7 @@ public class TeacherMenu {
 
 
         if(resultVisible){
-            TextFlet t = new TextFlet(p,p.width/2,p.height/2,100,100,"Skiv en elevs navn");
-            System.out.print("bruh");
+            System.out.println();
         }
 
     }
