@@ -6,23 +6,76 @@ public class TeacherMenu {
     PApplet p;
     long userID;
     StringList users;
-    boolean visibal = false;
+    TextFlet removeSpergsmaal;
+    TextFlet addSpergsmall;
+    TextFlet addRigtigtSvar;
+    TextFlet addSvar2;
+    TextFlet addSvar3;
+    boolean visibal = false; //christian visibel
     AlmindeligKnap editorKnap;
     AlmindeligKnap resultKnap;
+    //forskellige menuer
+    boolean menuVisible = true;
+    boolean resultVisible = false;
+    boolean editorVisible = false;
+    TeacherMenu(PApplet p) {
+        this.p = p;
 
-    TeacherMenu(PApplet p){
-        this.p =p;
-        editorKnap = new AlmindeligKnap(p, 200, 100, 100, 100, "Editor");
-        resultKnap = new AlmindeligKnap(p, 200, 200, 100, 100, "Resultater");
+        removeSpergsmaal = new TextFlet(p,50,50,200,50,"Fjern Spørgsmål");
+        addSpergsmall = new TextFlet(p,50,150,200,50,"Tilføj spørgsmål");
+        addRigtigtSvar = new TextFlet(p,50,250,200,50,"Tilføj rigtigt svar");
+        addSvar2 = new TextFlet(p,50,350,200,50,"tilføj svarmulighed");
+        addSvar3 = new TextFlet(p,50,450,200,50,"tilføj svarmulgihed");
+        editorKnap = new AlmindeligKnap(p, 400, 100, 100, 100, "Editor");
+        resultKnap = new AlmindeligKnap(p, 400, 200, 100, 100, "Resultater");
     }
-
-    void drawMenu(){
+    void drawMenu() {
+        removeSpergsmaal.tegnTextFlet();
+        addSpergsmall.tegnTextFlet();
+        addRigtigtSvar.tegnTextFlet();
+        addSvar2.tegnTextFlet();
+        addSvar3.tegnTextFlet();
         System.out.println(userID);
-        //p.text("Velkommen" + users.get((int) userID ), 100,100);
-        editorKnap.tegnKnap();
-        editorKnap.registrerKlik(200,100);
-        resultKnap.tegnKnap();
-        resultKnap.registrerKlik(200,100);
+        p.text("Velkommen" + users.get((int) userID ), 100,100);
+        if(menuVisible) {
+            editorKnap.tegnKnap();
+            editorKnap.registrerKlik(200, 100);
+            resultKnap.tegnKnap();
+            resultKnap.registrerKlik(200, 100);
+        }
+
+        if (resultKnap.klikket){
+            System.out.print("skrt");
+            visibal = false;
+            resultVisible = true;
+        }
+        if (editorKnap.klikket){
+            visibal = false;
+            editorVisible = true;
+        }
+
+
+        if(resultVisible){
+            TextFlet t = new TextFlet(p,p.width/2,p.height/2,100,100,"Skiv en elevs navn");
+            System.out.print("bruh");
+        }
+
+    }
+    void tryk(char key){
+        removeSpergsmaal.keyindput(key);
+        addSpergsmall.keyindput(key);
+        addRigtigtSvar.keyindput(key);
+        addSvar2.keyindput(key);
+        addSvar3.keyindput(key);
+
+    }
+    void clik(float mx, float my) {
+
+        removeSpergsmaal.KlikTjek(mx, my);
+        addSpergsmall.KlikTjek(mx, my);
+        addRigtigtSvar.KlikTjek(mx, my);
+        addSvar2.KlikTjek(mx, my);
+        addSvar3.KlikTjek(mx, my);
 
     }
 

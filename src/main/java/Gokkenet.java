@@ -66,6 +66,7 @@ public class Gokkenet extends PApplet {
         }
         if(tm.visibal){
             tm.drawMenu();
+
         }
 
         if (ls.visible && ls.btnLogin.klikket == true) {
@@ -81,6 +82,9 @@ public class Gokkenet extends PApplet {
         if(ls.visible){
             ls.typede(key);
         }
+        if(tm.visibal){
+            tm.tryk(key);
+        }
 
 
 
@@ -90,6 +94,9 @@ public class Gokkenet extends PApplet {
     public void mouseClicked() {
         if (ls.visible) {
             ls.clik(mouseX, mouseY);
+        }
+        if(tm.visibal){
+            tm.clik(mouseX,mouseY);
         }
         if(bm.visbel){
             bm.clicked(mouseX,mouseY);
