@@ -127,9 +127,9 @@ public class BattleMenu {
             QaustionTwo.registrerKlik(mouseX, mouseY);
             QaustionThree.registrerKlik(mouseX, mouseY);
             p.println(QaustionOne.erKlikket());
-            /*if(logOutKnap) {
+            if(logOutKnap) {
                 logOut.registrerKlik(mouseX, mouseY);
-            }*/
+            }
         } else if(qs.visibal ){
             qs.clicked(mouseX,mouseY);
         }
@@ -178,24 +178,32 @@ public class BattleMenu {
     void ifLifeIsZero(HealthBar h,boolean enemy){
         if(h.health <= 0){
             logOutKnap = true;
-            p.clear();                          //vi laver et clear for at lave en sort skærm. Det kunne være fedt med en baggrund.
+            p.clear();
+            p.background(200);//vi laver et clear for at lave en sort skærm. Det kunne være fedt med en baggrund.
             p.fill(255,255,255);                //den her og de 2 under laver teksten som den skal være.
             p.textAlign(PConstants.CENTER);
-
             if(logOut.erKlikket()){
-                visbel = false;
+                p.exit();
 
             }
-            p.textSize(64);
-            if(enemy == true)
-                p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " + dh.elevNavn +" vandt",p.width/2,p.height/2); //og det her er teksten
+                if(enemy == true)
+                    System.out.println(enemy);
+                    logOut.tegnKnap();
+                    p.textSize(64);
+                    p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+
+                            "\n og " + dh.elevNavn +" vandt",p.width/2,p.height/2); //og det her er teksten
+
             if (enemy == false)
+
+                logOut.tegnKnap();
+                p.textSize(64);
                 p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " +
                         "udforderen" +" vandt",p.width/2,p.height/2); //og det her er teksten
 
+
         }
 
-        /* logOut.tegnKnap();*/
+
     }
 }
 
