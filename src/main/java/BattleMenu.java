@@ -31,7 +31,7 @@ public class BattleMenu {
         QaustionOne= new AlmindeligKnap(p,330,400,224,448, "1");
         QaustionTwo = new AlmindeligKnap(p,550,400,224,448,"2");
         QaustionThree = new AlmindeligKnap(p,770,400,224,480, "3");
-        logOut = new AlmindeligKnap(p,200,500,700,200, "Log out");
+        logOut = new AlmindeligKnap(p,200,500,700,200, "Exit");
         qs = new Qaustions(p,qaustions, Enemy);
         makeQaustions();
         changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
@@ -186,19 +186,24 @@ public class BattleMenu {
                 p.exit();
 
             }
-                if(enemy == true)
+                if(enemy == true){
                     System.out.println(enemy);
                     logOut.tegnKnap();
                     p.textSize(64);
                     p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+
                             "\n og " + dh.elevNavn +" vandt",p.width/2,p.height/2); //og det her er teksten
+                    enemy = true;
+                }
 
-            if (enemy == false)
-
+            if (enemy == false){
                 logOut.tegnKnap();
                 p.textSize(64);
                 p.text(dh.elevNavn + " fik " + dh.svaretRigtigt + " point."+ "\n og " +
                         "udforderen" +" vandt",p.width/2,p.height/2); //og det her er teksten
+
+                enemy = false;
+
+            }
 
 
         }
