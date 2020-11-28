@@ -17,7 +17,7 @@ public class Gokkenet extends PApplet {
     LoginSide ls;
     String testUser = "Marius" , testPassword = "Sex6";
     StringList users = new StringList();
-    long userId;
+    public static long userId;
     BattleMenu bm;
     PImage bg;
     Table questions;
@@ -63,7 +63,7 @@ public class Gokkenet extends PApplet {
         ls = new LoginSide(this);
         bm = new BattleMenu(this, questions );
         bg = loadImage("bg.png");
-        tm = new TeacherMenu(this);
+        tm = new TeacherMenu(this, connection);
     }
 
     @Override

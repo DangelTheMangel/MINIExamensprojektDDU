@@ -3,9 +3,14 @@ import processing.core.PApplet;
 import processing.data.StringList;
 import processing.data.Table;
 
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class TeacherMenu {
     PApplet p;
-    long userID;
+     long userID = Gokkenet.userId;
     StringList users;
     TextFlet removeSpergsmaal;
     TextFlet addSpergsmall;
@@ -18,15 +23,16 @@ public class TeacherMenu {
     AlmindeligKnap editorKnap , backToMenu, nyElev;
     AlmindeligKnap resultKnap, nyHoldMenu, indsaetNytHold;
     AlmindeligKnap addSpergsmalK, elevEn,elevTo,elevTre, exit;
-
+    Connection connection;
 
     //forskellige menuer
     boolean menuVisible = true;
     boolean resultVisible = false;
     boolean editorVisible = false;
     boolean nyHoldVisible = false;
-    TeacherMenu(PApplet p) {
+    TeacherMenu(PApplet p, Connection connection) {
         this.p = p;
+        this.connection = connection;
         exit = new AlmindeligKnap(p, 50, 460, p.width-100, 100, "Luk Program");
         elevEn = new AlmindeligKnap(p,50,220,p.width/2-100,50,"1");
         elevTo = new AlmindeligKnap(p,50,320,p.width/2-100,50,"2");
@@ -51,6 +57,7 @@ public class TeacherMenu {
 
 
     void drawMenu() {
+        userID = Gokkenet.userId;
         if(exit.klikket){
             p.exit();
         }
@@ -235,5 +242,27 @@ public class TeacherMenu {
 
 
     }
+
+    public void hold() {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rsMessages = statement.executeQuery("SELECT Hold.Navn, " );
+
+
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+   /* void updateHold() {
+        try {
+            String sql = "INSERT INTO message (userId, threadId, message) VALUES (" + userId + "," + threadId + ",'" + msg + "')";
+            Statement statement = connection.createStatement();
+            statement.execute(sql);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }*/
 
 }
