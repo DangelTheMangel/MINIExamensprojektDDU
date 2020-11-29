@@ -16,7 +16,7 @@ public class Gokkenet extends PApplet {
 
     LoginSide ls;
    // String testUser = "Albert" , testPassword = "Abe123";
-   String testUser = "Marius" , testPassword = "Sex6";
+   String testUser = " Marius" , testPassword = " Sex6";
     StringList users = new StringList();
     public static long userId;
     BattleMenu bm;
@@ -173,7 +173,8 @@ public class Gokkenet extends PApplet {
                     ls.visible = false;
                     if(!rsRoleIsTeacher){
                         bm.visbel = true;
-                    }else {
+                    }
+                    if(rsRoleIsTeacher){
                         tm.userID = userId;
                         tm.users=users;
                         tm.visibal= true;
