@@ -191,6 +191,9 @@ public class TeacherMenu {
     }
 
     void drawReMenu(){
+        p.fill(200);
+        p.rect(50,100,p.width-100,450);
+        p.fill(0);
         elevEn.tegnKnap();
         nyElev.tegnKnap();
         if(resint < 0){
@@ -199,6 +202,8 @@ public class TeacherMenu {
         if(resint > eleverList.size()-1){
             resint = 0;
         }
+
+
         String text = getScore(resint) ;
         p.text(text, p.width/2-p.textWidth(text)/2,p.height/2-180);
         if(elevEn.klikket){
