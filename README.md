@@ -40,6 +40,15 @@ Det er kun lærer der kan tilføje bruger. Man starter med at logge ind med en l
 * skal være komamsperert 
 * skal ligne expelet her på git
 
+### Hvordan man for kodeordet og brugernavnet
+Efternavnet som er fra csv filen man har lagt ind bliver brugernavnet og koden er efternavnet med 42 bag på fx. Henrik Busketrol bliver til:
+
+Brugernavn:
+Busketrol
+
+Kodeord:
+Busketrol42
+
 ### coden der laver brugerne
 ``` Java
 Statement s = null;
