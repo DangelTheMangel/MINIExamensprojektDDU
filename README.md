@@ -34,9 +34,11 @@ Kodeord:Sex6
 
 ##  tilføje bruger
 ### hvordan man tilføj bruger
-Det er kun lærer der kan tilføje bruger. Man starter med at logge ind med en lære det kunne fx være Brugernavn: Marius Kode: Sex6.Her kommer du ind i lære menuen og så trykker du på "Tilføj elever fra fil ...". når du har klikket på den kommer stifinder frem og du kan så vælge en csv fil med klasse men der er krav til csv filen. Du kan læse krav til filen nede under. i Mappen ... kan du se et exmpel på csv fil som man kan bruge til at teste funktionen med. csv filen kan også få fra lectio. du kan eksportere 
+Det er kun lærer der kan tilføje bruger. Man starter med at logge ind med en lære det kunne fx være Brugernavn: Marius Kode: Sex6.Her kommer du ind i lære menuen og så trykker du på "Tilføj elever fra fil ...". når du har klikket på den kommer stifinder frem og du kan så vælge en csv fil med klasse men der er krav til csv filen. Du kan læse krav til filen nede under. i Mappen ... kan du se et exmpel på csv fil som man kan bruge til at teste funktionen med. csv filen kan også få fra lectio. du kan eksportere den til en excel fil som du derefter laver om til en csv i excel også skal du være sikker på den er kommasperaeret(vis du vælger kommasperaeret gøre den det ikke i excel så forslag herfra er at expotere den fra excel til notepad++ og derfra ersatte ; med ,).
 
 ### Krav til csv fil
+* Item 1 skal være komamsperert 
+* Item 2 skal ligne expelet her på git
 
 ### coden der laver brugerne
 ``` Java
