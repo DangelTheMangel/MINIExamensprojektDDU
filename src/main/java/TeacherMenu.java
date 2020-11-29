@@ -1,4 +1,3 @@
-import org.w3c.dom.Text;
 import processing.core.PApplet;
 import processing.data.StringList;
 import processing.data.Table;
@@ -6,7 +5,6 @@ import processing.data.Table;
 import java.io.File;
 import java.sql.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +14,7 @@ public class TeacherMenu {
     int resint;
 
     ArrayList<Elever> eleverList = new ArrayList<Elever>();
-     long userID = Gokkenet.userId;
+     long userID = Main.userId;
     StringList users;
     TextFlet removeSpergsmaal;
     TextFlet addSpergsmall;
@@ -91,7 +89,7 @@ public class TeacherMenu {
 
 
     void drawMenu() {
-        userID = Gokkenet.userId;
+        userID = Main.userId;
         if(exit.klikket){
             p.exit();
         }

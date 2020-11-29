@@ -4,14 +4,10 @@ import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -202,7 +198,7 @@ public class BattleMenu {
             int p = (int) dh.svaretRigtigt;
             Score s = new Score(p, date);
             try {
-                String sql = "INSERT INTO Score (personHoldId, dato, point) SELECT PersonHoldId, now(), " + p + " FROM PersonHold WHERE personId = " + Gokkenet.userId;
+                String sql = "INSERT INTO Score (personHoldId, dato, point) SELECT PersonHoldId, now(), " + p + " FROM PersonHold WHERE personId = " + Main.userId;
                 Statement statement = connection.createStatement();
                 boolean success = statement.execute(sql);
                 System.out.println(sql);

@@ -2,9 +2,7 @@
 import processing.core.PApplet;
 import processing.data.Table;
 
-import java.io.File;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -54,7 +52,7 @@ public class KlasseLoadeder {
                 String password = efternavn+42;
                 boolean teacher =  klasse.getString(i,1).equals("Lærer");
 
-                String sql = "INSERT INTO user (username, password, teacher, fornavn, efternavn) VALUES ('"+userName+"', '"+Gokkenet.getHash(password)+
+                String sql = "INSERT INTO user (username, password, teacher, fornavn, efternavn) VALUES ('"+userName+"', '"+ Main.getHash(password)+
                         "', "+ teacher +", '"+fornavn+"', '"+efternavn+"');";
                 System.out.println(sql);
                 boolean success = s.execute(sql);

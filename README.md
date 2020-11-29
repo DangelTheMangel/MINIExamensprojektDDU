@@ -1,4 +1,4 @@
-# Gokkenet
+# Main
 Beskrivelse af databaseforløb
 Med Mærius, Christian og Casper.
 
