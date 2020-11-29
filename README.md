@@ -34,7 +34,10 @@ Kodeord:Sex6
 
 ##  tilføje bruger
 ### hvordan man tilføj bruger
-Det er kun lærer der kan tilføje bruger. Man starter med at logge ind 
+Det er kun lærer der kan tilføje bruger. Man starter med at logge ind med en lære det kunne fx være Brugernavn: Marius Kode: Sex6.Her kommer du ind i lære menuen og så trykker du på "Tilføj elever fra fil ...". når du har klikket på den kommer stifinder frem og du kan så vælge en csv fil med klasse men der er krav til csv filen. Du kan læse krav til filen nede under. i Mappen ... kan du se et exmpel på csv fil som man kan bruge til at teste funktionen med. csv filen kan også få fra lectio. du kan eksportere 
+
+### Krav til csv fil
+
 ### coden der laver brugerne
 ``` Java
 Statement s = null;
