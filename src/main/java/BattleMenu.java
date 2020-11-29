@@ -3,6 +3,15 @@ import processing.core.PConstants;
 import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -25,7 +34,9 @@ public class BattleMenu {
     DataHolder dh;
     float fly = 0;
     boolean saved = false;
-    BattleMenu(PApplet p,Table qaustions){
+    private Connection connection = null;
+    BattleMenu(PApplet p,Table qaustions , Connection connection){
+        this.connection = connection;
         kort = p.loadImage("Kort.png");
         this.p = p;
         this.qaustions = qaustions;
@@ -187,7 +198,16 @@ public class BattleMenu {
             newRow.setFloat("Svaret Rigtig",dh.svaretRigtigt);
 
             p.saveTable(table,"data/"+dh.elevNavn+p.year() + p.month() + p.day() + p.hour() +p.minute() +p.second() +".csv");
-
+            Date date = new Date();
+            int p = (int) dh.svaretRigtigt;
+            Score s = new Score(p, date);
+            try{
+                String sql = "INSERT INTO Score (personHoldId, dato, point) SELECT PersonHoldId, now(), " + p + " FROM PersonHold WHERE personId = " + Gokkenet.userId;
+                Statement statement = connection.createStatement();
+                statement.execute(sql);
+            }catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
             saved=true;
             System.out.println("gemte database håber jeg - Battle menu, 191");
         }
