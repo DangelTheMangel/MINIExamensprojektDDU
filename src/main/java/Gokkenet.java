@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class Gokkenet extends PApplet {
 
     LoginSide ls;
-    String testUser = "Marius" , testPassword = "Sex6";
+    String testUser = " Marius" , testPassword = " Sex6";
     StringList users = new StringList();
     public static long userId;
     BattleMenu bm;
@@ -61,7 +61,7 @@ public class Gokkenet extends PApplet {
     public void setup() {
         questions = loadTable("sp.csv");
         ls = new LoginSide(this);
-        bm = new BattleMenu(this, questions );
+        bm = new BattleMenu(this, questions , connection);
         bg = loadImage("bg.png");
         tm = new TeacherMenu(this, connection);
     }
@@ -118,7 +118,7 @@ public class Gokkenet extends PApplet {
 
         }
     }
-    public String getHash(String passwordToHash){
+    public static String getHash(String passwordToHash){
 
         String generatedPassword = null;
         try {

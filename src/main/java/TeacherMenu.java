@@ -7,9 +7,14 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class TeacherMenu {
     PApplet p;
+    int resint;
+
+    ArrayList<Elever> eleverList = new ArrayList<Elever>();
      long userID = Gokkenet.userId;
     StringList users;
     TextFlet removeSpergsmaal;
@@ -34,24 +39,34 @@ public class TeacherMenu {
         this.p = p;
         this.connection = connection;
         exit = new AlmindeligKnap(p, 50, 460, p.width-100, 100, "Luk Program");
-        elevEn = new AlmindeligKnap(p,50,220,p.width/2-100,50,"1");
-        elevTo = new AlmindeligKnap(p,50,320,p.width/2-100,50,"2");
-        elevTre = new AlmindeligKnap(p,50,420,p.width/2-100,50,"3");
-        nyElev = new AlmindeligKnap(p,50,520,p.width/2-100,50,"Ny elev");
+
         hold = new TextFlet(p,50,120,p.width/2-100,50,"Hold");
         removeSpergsmaal = new TextFlet(p,50,50,200,50,"Fjern Spørgsmål");
         addSpergsmall = new TextFlet(p,50,150,200,50,"Tilføj spørgsmål");
         addRigtigtSvar = new TextFlet(p,50,250,200,50,"Tilføj korrekt svar");
         addSvar2 = new TextFlet(p,50,350,200,50,"Tilføj svar mulighed");
         addSvar3 = new TextFlet(p,50,450,200,50,"Tilføj svar mulighed 2");
-        backToMenu = new AlmindeligKnap(p,p.width/2 - 100,600,200,50,"back to menu");
-        editorKnap = new AlmindeligKnap(p, 50, 100, p.width-100, 100, "Editor");
+        backToMenu = new AlmindeligKnap(p,p.width/2 - 100,600,200,50,"Tilbage til menu");
+        editorKnap = new AlmindeligKnap(p, 50, 100, p.width-100, 100, "Spørgsmål laver");
         resultKnap = new AlmindeligKnap(p, 50, 220, p.width-100, 100, "Resultater");
-        nyHoldMenu = new AlmindeligKnap(p,50, 340, p.width-100, 100, "Hold instillinger");
+        nyHoldMenu = new AlmindeligKnap(p,50, 340, p.width-100, 100, "Tilføj elever fra fil ...");
         addSpergsmalK = new AlmindeligKnap(p,50,650,100,50,"Tilføj spørgsmål");
-        indsaetNytHold = new AlmindeligKnap(p,50,220,p.width/2-100,50,"Tilføj nyt hold");
-        holdNavn = new TextFlet(p,50,100,p.width/2-100,50,"Nyt holdnavn");
+        //indsaetNytHold = new AlmindeligKnap(p,50,220,p.width/2-100,50,"Tilføj nyt hold");
+        //holdNavn = new TextFlet(p,50,100,p.width/2-100,50,"Nyt holdnavn");
 
+        elevEn = new AlmindeligKnap(p,50,100,p.width-100,50,"Tilbage");
+        /*elevTo = new AlmindeligKnap(p,50,320,p.width/2-100,50,"2");
+        elevTre = new AlmindeligKnap(p,50,420,p.width/2-100,50,"3");*/
+        nyElev = new AlmindeligKnap(p,50,520,p.width-100,50,"Frem");
+        for(int i = 0; i<200; ++i){
+            eleverList.add(new Elever("Navn" + Gokkenet.getHash("w" + i)));
+            for(int j = 0; j < 8; j++){
+                Date date = new Date();
+                eleverList.get(i).addScore((int)p.random(1,100),date);
+            }
+
+
+        }
         sp = p.loadTable("sp.csv");
     }
 
@@ -63,7 +78,7 @@ public class TeacherMenu {
         }
 
         if(nyHoldVisible){
-            holdNavn.tegnTextFlet();
+           // holdNavn.tegnTextFlet();
             indsaetNytHold.tegnKnap();
             backToMenu.tegnKnap();
         }
@@ -95,11 +110,8 @@ public class TeacherMenu {
         }
 
         if(nyHoldMenu.klikket){
-            menuVisible = false;
-            resultVisible = false;
-            editorVisible = false;
-            nyHoldVisible = true;
-            //p.selectInput("Select a file to process:", "fileSelected");
+
+            p.selectInput("Select a file to process:", "fileSelected");
 
             nyHoldMenu.registrerRelease();
         }
@@ -155,11 +167,6 @@ public class TeacherMenu {
             editorVisible = true;
         }
 
-        if(indsaetNytHold.klikket){
-            System.out.println("hold tilføjet");
-            holdNavn.indput = "";
-            indsaetNytHold.registrerRelease();
-        }
 
 
 
@@ -167,11 +174,37 @@ public class TeacherMenu {
     }
 
     void drawReMenu(){
-        elevTre.tegnKnap();
-        elevTo.tegnKnap();
         elevEn.tegnKnap();
         nyElev.tegnKnap();
-        hold.tegnTextFlet();
+        if(resint < 0){
+            resint = eleverList.size();
+        }
+        if(resint > eleverList.size()){
+            resint = 0;
+        }
+        String text = getScore(resint) ;
+        p.text(text, p.width/2-p.textWidth(text)/2,p.height/2-180);
+        if(elevEn.klikket){
+            resint --;
+            elevEn.registrerRelease();
+        }
+
+        if(nyElev.klikket){
+            resint ++;
+            nyElev.registrerRelease();
+        }
+
+    }
+
+    String getScore(int i) {
+        Elever elev = eleverList.get(i);
+        String k = elev.navn + ": \n";
+
+        for(int j = 0; j < elev.scoreArrayList.size(); ++j) {
+            k = k + elev.scoreArrayList.get(j).point + "Points " + elev.scoreArrayList.get(j).date + "\n";
+
+        }
+        return k;
     }
     void drawSPMenu(){
         removeSpergsmaal.tegnTextFlet();
@@ -195,9 +228,7 @@ public class TeacherMenu {
             hold.keyindput(key);
         }
 
-        if(nyHoldVisible){
-            holdNavn.keyindput(key);
-        }
+
 
 
     }
@@ -206,7 +237,7 @@ public class TeacherMenu {
         if(nyHoldVisible){
             backToMenu.registrerKlik(mx,my);
             indsaetNytHold.registrerKlik(mx,my);
-            holdNavn.KlikTjek(mx,my);
+           // holdNavn.KlikTjek(mx,my);
         }
         if(menuVisible){
             exit.registrerKlik(mx,my);
@@ -235,8 +266,8 @@ public class TeacherMenu {
             backToMenu.registrerKlik(mx,my);
             hold.KlikTjek(mx,my);
             elevEn.registrerKlik(mx,my);
-            elevTo.registrerKlik(mx,my);
-            elevTre.registrerKlik(mx,my);
+          //  elevTo.registrerKlik(mx,my);
+            //elevTre.registrerKlik(mx,my);
             nyElev.registrerKlik(mx,my);
         }
 
