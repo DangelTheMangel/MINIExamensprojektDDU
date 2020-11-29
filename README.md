@@ -18,14 +18,6 @@ Vores målgruppe er elever i folkeskolens udskolingstrin, der har svært ved at 
 Problemformulering
 I det danske skolesystem er det alt for svært for elever at blive vurderet i forhold til deres faglige niveau[5]. 
 
-## Code Samples
-
-### Konstruere knap
-``` Java
-//Den måde man konstruere knappen er
-Button buttonTerning6 = new Button(XKordinat, YKordinat, X Størrelse, Y Størrelse, Hvad der skal stå på knaooen ,PApllet);
-
-```
 
 ## Kodeord og Brugernavne
 Brugernavn:Casper
@@ -39,3 +31,36 @@ Kodeord:Abe123
 Brugernavn:Marius
 Rolle: Lære
 Kodeord:Sex6
+
+##  tilføje bruger
+### hvordan man tilføj bruger
+Det er kun lærer der kan tilføje bruger. Man starter med at logge ind 
+### coden der laver brugerne
+``` Java
+Statement s = null;
+        try{
+            s = connection.createStatement();
+            boolean virkede = false;
+            for (int i = 0; i< klasse.getRowCount(); ++i){
+                String allFirstnames = klasse.getString(i,3);
+                String[] words = allFirstnames.split(" ");
+                String fornavn = words[0];
+                String efternavn = klasse.getString(i,4);
+                String userName = klasse.getString(i,4);
+                String password = efternavn+42;
+                boolean teacher =  klasse.getString(i,1).equals("Lærer");
+
+                String sql = "INSERT INTO user (username, password, teacher, fornavn, efternavn) VALUES ('"+userName+"', '"+ Main.getHash(password)+
+                        "', "+ teacher +", '"+fornavn+"', '"+efternavn+"');";
+                System.out.println(sql);
+                boolean success = s.execute(sql);
+                sql = "INSERT INTO personhold (personid, holdid) select userid, 1 from user where fornavn='"+fornavn+"' AND efternavn='+"+efternavn+"+';";
+                success = s.execute(sql);
+            }
+            System.out.println("Elver indsat = " +  virkede);
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+
+```
