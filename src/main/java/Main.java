@@ -167,7 +167,7 @@ public class Main extends PApplet {
                 System.out.println(rsRoleIsTeacher +"\n");
 
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
-                        || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword)) {
+                        /*|| testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword)*/) {
                     userId = rsUser.getLong(4);
                     bm.dh = new DataHolder(0,0,userId, rsUsername);
                     ls.visible = false;
