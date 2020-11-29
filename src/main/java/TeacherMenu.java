@@ -3,6 +3,7 @@ import processing.core.PApplet;
 import processing.data.StringList;
 import processing.data.Table;
 
+import java.io.File;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,24 +23,26 @@ public class TeacherMenu {
     TextFlet addRigtigtSvar;
     TextFlet addSvar2;
     TextFlet addSvar3 , hold, holdNavn;
-    Table sp;
-    KlasseLoadeder klasseLoadeder = new KlasseLoadeder(p);
+    Table sp = new Table();
+    KlasseLoadeder klasseLoadeder ;
     boolean visibal = false; //christian visibel
     AlmindeligKnap editorKnap , backToMenu, nyElev;
     AlmindeligKnap resultKnap, nyHoldMenu, indsaetNytHold;
     AlmindeligKnap addSpergsmalK, elevEn,elevTo,elevTre, exit;
     Connection connection;
+    File questions = new File(".\\src\\main\\java\\resources\\sp.csv");
 
     //forskellige menuer
     boolean menuVisible = true;
     boolean resultVisible = false;
     boolean editorVisible = false;
     boolean nyHoldVisible = false;
+
     TeacherMenu(PApplet p, Connection connection) {
         this.p = p;
         this.connection = connection;
         exit = new AlmindeligKnap(p, 50, 460, p.width-100, 100, "Luk Program");
-
+        klasseLoadeder = new KlasseLoadeder(p,connection);
         hold = new TextFlet(p,50,120,p.width/2-100,50,"Hold");
         removeSpergsmaal = new TextFlet(p,50,50,200,50,"Fjern Spørgsmål");
         addSpergsmall = new TextFlet(p,50,150,200,50,"Tilføj spørgsmål");
@@ -58,16 +61,32 @@ public class TeacherMenu {
         /*elevTo = new AlmindeligKnap(p,50,320,p.width/2-100,50,"2");
         elevTre = new AlmindeligKnap(p,50,420,p.width/2-100,50,"3");*/
         nyElev = new AlmindeligKnap(p,50,520,p.width-100,50,"Frem");
-        for(int i = 0; i<200; ++i){
-            eleverList.add(new Elever("Navn" + Gokkenet.getHash("w" + i)));
-            for(int j = 0; j < 8; j++){
-                Date date = new Date();
-                eleverList.get(i).addScore((int)p.random(1,100),date);
+        Statement s = null;
+        try {
+            s = connection.createStatement();
+            ResultSet rsStudent = s.executeQuery("select personId, fornavn, efternavn from personhold " +
+                    "inner join user on personhold.personid = user.userid where holdid = 1 and Teacher = false");
+            while (rsStudent.next()) {
+                long rsUserId = rsStudent.getLong("personId");
+                String rsUserFirstName = rsStudent.getString("fornavn");
+                String rsUserLastName = rsStudent.getString("efternavn");
+                Elever elev = new Elever(rsUserFirstName + " " + rsUserLastName);
+                eleverList.add(elev);
+
+                ResultSet rsScore = s.executeQuery("select * from score inner join personhold on score.personholdid = " +
+                        "personhold.personholdid where personid="+rsUserId+" and holdid=1");
+                while(rsScore.next()){
+                    int rsPoint = rsScore.getInt("point");
+                    Date rsDate = rsScore.getDate("dato");
+                    elev.addScore(rsPoint,rsDate);
+                }
+
+
             }
-
-
+        }catch (SQLException throwable){
+            throwable.printStackTrace();
         }
-        sp = p.loadTable("sp.csv");
+        sp = p.loadTable(questions.getPath());
     }
 
 
@@ -121,7 +140,7 @@ public class TeacherMenu {
         for(int i=1; i<sp.getRowCount(); i++)
         if(removeSpergsmaal.indput.equals(sp.getString(i,0))){
             sp.removeRow(i);
-            p.saveTable(sp,"sp.csv");
+            p.saveTable(sp, questions.getPath());
 
         }
 
@@ -136,7 +155,7 @@ public class TeacherMenu {
             sp.setString(sp.getRowCount()-1,2,addRigtigtSvar.indput);
             sp.setString(sp.getRowCount()-1,3,addSvar2.indput);
             sp.setString(sp.getRowCount()-1,4,addSvar3.indput);
-            p.saveTable(sp,"sp.csv");
+            p.saveTable(sp, questions.getPath());
             addSpergsmalK.registrerRelease();
         }
 
@@ -177,9 +196,9 @@ public class TeacherMenu {
         elevEn.tegnKnap();
         nyElev.tegnKnap();
         if(resint < 0){
-            resint = eleverList.size();
+            resint = eleverList.size()-1;
         }
-        if(resint > eleverList.size()){
+        if(resint > eleverList.size()-1){
             resint = 0;
         }
         String text = getScore(resint) ;

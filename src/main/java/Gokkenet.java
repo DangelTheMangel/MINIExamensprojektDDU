@@ -15,7 +15,8 @@ import java.sql.SQLException;
 public class Gokkenet extends PApplet {
 
     LoginSide ls;
-    String testUser = " Marius" , testPassword = " Sex6";
+   // String testUser = "Albert" , testPassword = "Abe123";
+   String testUser = "Marius" , testPassword = "Sex6";
     StringList users = new StringList();
     public static long userId;
     BattleMenu bm;
@@ -49,7 +50,8 @@ public class Gokkenet extends PApplet {
             println("Window was closed or the user hit cancel.");
         } else {
             try{
-                tm.klasseLoadeder.klasse = loadTable(selection.getPath());
+                Table ny= loadTable(selection.getPath());
+                tm.klasseLoadeder.filetoklass(ny);
             } catch (NullPointerException g){
                 println("Fejl ved at loade filen der ligger ved" + selection.getPath());
             }
@@ -166,6 +168,8 @@ public class Gokkenet extends PApplet {
 
                 if (ls.userName.indput.equals(rsUsername) && getHash(ls.password.indput).equals(rsPassword)
                         || testUser.equals(rsUsername) && getHash(testPassword).equals(rsPassword)) {
+                    userId = rsUser.getLong(4);
+                    bm.dh = new DataHolder(0,0,userId, rsUsername);
                     ls.visible = false;
                     if(!rsRoleIsTeacher){
                         bm.visbel = true;
@@ -177,8 +181,7 @@ public class Gokkenet extends PApplet {
 
 
                     ls.password.klikket = false;
-                    userId = rsUser.getLong(3);
-                    bm.dh = new DataHolder(0,0,userId, rsUsername);
+
 
                 }
             }

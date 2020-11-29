@@ -201,11 +201,13 @@ public class BattleMenu {
             Date date = new Date();
             int p = (int) dh.svaretRigtigt;
             Score s = new Score(p, date);
-            try{
+            try {
                 String sql = "INSERT INTO Score (personHoldId, dato, point) SELECT PersonHoldId, now(), " + p + " FROM PersonHold WHERE personId = " + Gokkenet.userId;
                 Statement statement = connection.createStatement();
-                statement.execute(sql);
-            }catch (SQLException throwable) {
+                boolean success = statement.execute(sql);
+                System.out.println(sql);
+                System.out.println("INSERT, " + success);
+            } catch (SQLException throwable) {
                 throwable.printStackTrace();
             }
             saved=true;
