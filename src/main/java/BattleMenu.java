@@ -41,7 +41,7 @@ public class BattleMenu {
         QaustionOne= new AlmindeligKnap(p,330,400,224,448, "1");
         QaustionTwo = new AlmindeligKnap(p,550,400,224,448,"2");
         QaustionThree = new AlmindeligKnap(p,770,400,224,480, "3");
-        logOut = new AlmindeligKnap(p,200,500,700,200, "Exit");
+        logOut = new AlmindeligKnap(p,p.width/2 - 350,500,700,200, "Luk Program");
         qs = new Qaustions(p,qaustions, Enemy);
         makeQaustions();
         changeBtnName(QaustionOne, spagersmal.get(firstQ).qaustion.getString(0,0));
@@ -63,9 +63,9 @@ public class BattleMenu {
         p.image(showHEadhog,p.width-320 + sin,140, 160 + sin,150 );
         p.image(Enemy,p.width-320 ,80+sin, 150,150);
         EHealthBar = new HealthBar(p,p.width-160,60,eLife);
-        EHealthBar.name = "Enemy Health";
+        EHealthBar.name = "udforderen Liv";
         PHealthBar = new HealthBar(p,60,p.height-60,pLife);
-        PHealthBar.name = "Player Health";
+        PHealthBar.name = "Spiller Liv";
         QaustionOne.tegnKort(kort,false);
         QaustionTwo.tegnKort(kort,false);
         QaustionThree.tegnKort(kort,false);
@@ -73,7 +73,7 @@ public class BattleMenu {
         p.rect(0,p.height-120,p.width,120);
         p.fill(0);
         p.textSize(32);
-        p.text("Choose a card",p.width/2 -p.textWidth("Choose a card")/2,p.height-60);
+        p.text("Vælg et kort",p.width/2 -p.textWidth("Vælg et kort")/2,p.height-60);
         p.textSize(16);
         EHealthBar.tegnHealthBar();
         PHealthBar.tegnHealthBar();
