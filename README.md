@@ -2,7 +2,8 @@
 
 # MINIExamensprojektDDU
 
-
+## Vigigt før brug af program 
+du skal i intilej sætte resources til en resources mappe da den ikke selv gøre det.
 ## Introduction
 Detter var et DDDU projekt
 ### Formål
